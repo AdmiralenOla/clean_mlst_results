@@ -20,7 +20,7 @@ def my_args():
 def main():
 	args = my_args()
 	try:
-		myfile = csv.reader(open(args.mlst_results_file,'rU'), skipinitialspace=False, delimiter='\t')
+		myfile = csv.reader(open(args.mlst_results_file,'r'), skipinitialspace=False, delimiter='\t')
 	except Exception as e:
 		sys.exit('Failed to open %s' % args.mlst_results_file)
 
@@ -28,7 +28,7 @@ def main():
 	result_schemes = {}
 	results = {} 
 	for row in myfile:
-		alleles = [re.match('\w+\(([~?\d+\??\,]+)\)',a).group(1) for a in row[3:]]
+		alleles = [re.match('\w+\(([~?\-?\d+\??\,]+)\)',a).group(1) for a in row[3:]]
 		isolatename = re.match('(.*).(fasta|fa)',row[0]).group(1)
 		scheme = row[1]
 		ST = row[2]
